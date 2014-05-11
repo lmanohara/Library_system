@@ -1,0 +1,102 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <bean name="connection" class="com.spring.librarysystem.repo.DBConnectionImpl" scope="singleton">
+        <property name="userName" value="root"/>
+        <property name="password" value=""/>
+    </bean>
+
+    <bean name="material" class="com.spring.librarysystem.dto.Material" scope="prototype">
+        <property name="meterialId" value="0" />
+        <property name="title" value=""/>
+        <property name="name" value=""/>
+    </bean>
+
+    <bean name="magazine" class="com.spring.librarysystem.dto.Magazine">
+        <property name="title" value=""/>
+        <property name="name" value="Ny mag"/>
+        <property name="magazineType" value="0"/>
+        <property name="reviewerName" value=""/>
+    </bean>
+
+    <bean name="newspaper" parent="material" scope="prototype" class="com.spring.librarysystem.dto.Newspaper">
+        <property name="name" value=""/>
+        <property name="auditorName" value=""/>
+    </bean>
+
+    <bean name="book" parent="material" scope="prototype" class="com.spring.librarysystem.dto.Book">
+        <property name="name" value=""/>
+        <property name="ISBN" value=""/>
+        <property name="noOfPages" value="0"/>
+    </bean>
+
+    <bean name="barrowBook" class="com.spring.librarysystem.dto.Member">
+        <property name="material" >
+            <bean class="com.spring.librarysystem.dto.Book">
+                <property name="meterialId" value="0"/>
+                <property name="title" value=""/>
+                <property name="name" value=""/>
+                <property name="ISBN" value=""/>
+                <property name="noOfPages" value="0"/>
+            </bean>
+        </property>
+
+    </bean>
+
+    <bean name="member" class="com.spring.librarysystem.dto.Member" scope="prototype">
+        <property name="memberId" value="0"/>
+        <property name="name" value=""/>
+        <property name="address" value=""/>
+        <property name="material" >
+            <bean class="com.spring.librarysystem.dto.Book">
+                <property name="meterialId" value="0"/>
+                <property name="title" value=""/>
+                <property name="name" value=""/>
+                <property name="ISBN" value=""/>
+                <property name="noOfPages" value="0"/>
+            </bean>
+        </property>
+    </bean>
+
+    <bean name="silverMember" parent="member" class="com.spring.librarysystem.dto.SilverMember">
+    </bean>
+
+    <bean name="goldMember" parent="member" class="com.spring.librarysystem.dto.GoldMember">
+        <property name="creditCardNo" value=""/>
+        <property name="vehicleNo" value=""/>
+    </bean>
+
+    <bean name="materialDAO" class="com.spring.librarysystem.dao.MaterialDAOImpl">
+        <property name="connection" ref="connection"/>
+    </bean>
+
+    <bean name="memberDAO" class="com.spring.librarysystem.dao.MemberDAOImpl">
+        <property name="connection" ref="connection" />
+    </bean>
+    
+    <bean name="memberService" class="com.spring.librarysystem.service.MemberServiceImpl">
+        <property name="memberDAO" ref="memberDAO"/>
+    </bean>
+    
+    <bean name="materialService" class="com.spring.librarysystem.service.MaterialServiceImpl">
+        <property name="materialDAO" ref="materialDAO"/>
+    </bean>
+
+    <bean name="validation" class="com.spring.librarysystem.validation.Validation">
+
+    </bean>
+
+    <bean id="materialInterceptor" class="com.spring.librarysystem.validation.MaterialInterceptor" />
+
+    <bean id="cachedService" class="org.springframework.aop.framework.ProxyFactoryBean">
+        <property name="target" ref="magazine"/>
+        <property name="interceptorNames">
+            <list>
+                <value>materialInterceptor</value>
+            </list>
+        </property>
+    </bean>
+
+    </beans>
