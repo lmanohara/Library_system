@@ -16,7 +16,7 @@
 
     <bean name="magazine" class="com.spring.librarysystem.dto.Magazine">
         <property name="title" value=""/>
-        <property name="name" value="Ny mag"/>
+        <property name="name" value=""/>
         <property name="magazineType" value="0"/>
         <property name="reviewerName" value=""/>
     </bean>
@@ -88,15 +88,61 @@
 
     </bean>
 
-    <bean id="materialInterceptor" class="com.spring.librarysystem.validation.MaterialInterceptor" />
+    <bean id="validationInterceptor" class="com.spring.librarysystem.validation.ValidationInterceptor" />
 
-    <bean id="cachedService" class="org.springframework.aop.framework.ProxyFactoryBean">
+    <bean id="MagazineCachedService" class="org.springframework.aop.framework.ProxyFactoryBean">
         <property name="target" ref="magazine"/>
         <property name="interceptorNames">
             <list>
-                <value>materialInterceptor</value>
+                <value>validationInterceptor</value>
             </list>
         </property>
     </bean>
+
+    <bean id="NewspaperCachedService" class="org.springframework.aop.framework.ProxyFactoryBean">
+        <property name="target" ref="newspaper"/>
+        <property name="interceptorNames">
+            <list>
+                <value>validationInterceptor</value>
+            </list>
+        </property>
+    </bean>
+
+    <bean id="BookCachedService" class="org.springframework.aop.framework.ProxyFactoryBean">
+        <property name="target" ref="book"/>
+        <property name="interceptorNames">
+            <list>
+                <value>validationInterceptor</value>
+            </list>
+        </property>
+    </bean>
+
+    <bean id="SilverMemberCachedService" class="org.springframework.aop.framework.ProxyFactoryBean">
+        <property name="target" ref="silverMember"/>
+        <property name="interceptorNames">
+            <list>
+                <value>validationInterceptor</value>
+            </list>
+        </property>
+    </bean>
+
+    <bean id="GoldMemberCachedService" class="org.springframework.aop.framework.ProxyFactoryBean">
+        <property name="target" ref="goldMember"/>
+        <property name="interceptorNames">
+            <list>
+                <value>validationInterceptor</value>
+            </list>
+        </property>
+    </bean>
+
+    <bean id="MemberCachedService" class="org.springframework.aop.framework.ProxyFactoryBean">
+        <property name="target" ref="member"/>
+        <property name="interceptorNames">
+            <list>
+                <value>validationInterceptor</value>
+            </list>
+        </property>
+    </bean>
+
 
     </beans>
