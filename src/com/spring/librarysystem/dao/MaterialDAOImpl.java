@@ -2,10 +2,9 @@ package com.spring.librarysystem.dao;
 
 import com.spring.librarysystem.dto.Book;
 import com.spring.librarysystem.dto.Magazine;
-import com.spring.librarysystem.dto.Material;
 import com.spring.librarysystem.dto.Newspaper;
 import com.spring.librarysystem.repo.DBConnection;
-import com.sun.org.apache.bcel.internal.generic.NEW;
+
 
 import java.sql.ResultSet;
 import java.sql.Statement;
@@ -21,16 +20,25 @@ public class MaterialDAOImpl implements MaterialDAO {
 
     private DBConnection connection;
 
+    /**
+     *return mysql connection instance
+     */
     @Override
     public DBConnection getConnection() {
         return connection;
     }
 
+    /**
+     *set mysql connection instance
+     */
     @Override
     public void setConnection(DBConnection connection) {
         this.connection = connection;
     }
 
+    /**
+     *insert a magazine to the db
+     */
     @Override
     public void insertMagazine(Magazine magazine) throws SQLException{
         String query = "INSERT INTO magazine (title, name, type_id) VALUES('"
@@ -44,6 +52,9 @@ public class MaterialDAOImpl implements MaterialDAO {
 
     }
 
+    /**
+     *insert a newspaper to the db
+     */
     @Override
     public void insertNewspaper(Newspaper newspaper) throws SQLException{
         String query = "INSERT INTO newspaper (title, name) VALUES('"
@@ -56,6 +67,9 @@ public class MaterialDAOImpl implements MaterialDAO {
 
     }
 
+    /**
+     *insert a book to the db
+     */
     @Override
     public void insertBook(Book book) throws SQLException{
         String query = "INSERT INTO book (title, name, ISBN, no_of_pages) VALUES('"
@@ -70,6 +84,9 @@ public class MaterialDAOImpl implements MaterialDAO {
 
     }
 
+    /**
+     *delete a magazine from db
+     */
     @Override
     public void deleteMagazine(Magazine magazine) throws SQLException{
         String query = "DELETE FROM magazine WHERE mag_id ="
@@ -80,6 +97,9 @@ public class MaterialDAOImpl implements MaterialDAO {
         statement.executeUpdate(query);
     }
 
+    /**
+     *delete a newspaper from db
+     */
     @Override
     public void deleteNewspaper(Newspaper newspaper) throws SQLException{
         String query = "DELETE FROM newspaper WHERE np_id ="
@@ -90,6 +110,9 @@ public class MaterialDAOImpl implements MaterialDAO {
         statement.executeUpdate(query);
     }
 
+    /**
+     *delete a book from the db
+     */
     @Override
     public void deleteBook(Book book) throws SQLException{
         String query = "DELETE FROM magazine WHERE book_id ="
@@ -100,6 +123,9 @@ public class MaterialDAOImpl implements MaterialDAO {
         statement.executeUpdate(query);
     }
 
+    /**
+     *update details of the magazine
+     */
     @Override
     public void updateMagazine(Magazine magazine)throws SQLException{
         String query = "UPDATE magazine SET title = '"
@@ -113,6 +139,9 @@ public class MaterialDAOImpl implements MaterialDAO {
         statement.executeUpdate(query);
     }
 
+    /**
+     *update details of the newspaper
+     */
     @Override
     public void updateNewspaper(Newspaper newspaper)throws SQLException{
         String query = "UPDATE magazine SET title = '"
@@ -125,6 +154,9 @@ public class MaterialDAOImpl implements MaterialDAO {
         statement.executeUpdate(query);
     }
 
+    /**
+     *update details of the book
+     */
     @Override
     public void updateBook(Book book)throws SQLException{
         String query = "UPDATE newspaper SET title = '"
@@ -157,6 +189,9 @@ public class MaterialDAOImpl implements MaterialDAO {
 //        Connection conn = connection.getConnection();
 //    }
 
+    /**
+     *return all magazine from the db
+     */
     @Override
     public List<Magazine> viewAllMagazine() throws SQLException{
         Connection conn = connection.getConnection();
@@ -176,6 +211,9 @@ public class MaterialDAOImpl implements MaterialDAO {
         return  magazines;
     }
 
+    /**
+     *return all newspaper from the db
+     */
     @Override
     public List<Newspaper> viewAllNewspaper() throws SQLException{
         Connection conn = connection.getConnection();
@@ -195,6 +233,9 @@ public class MaterialDAOImpl implements MaterialDAO {
         return  newspapers;
     }
 
+    /**
+     *return all book from the db
+     */
     @Override
     public List<Book> viewAllBook() throws  SQLException{
         Connection conn = connection.getConnection();

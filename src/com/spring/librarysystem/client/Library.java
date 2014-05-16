@@ -3,7 +3,6 @@ package com.spring.librarysystem.client;
 import com.spring.librarysystem.dto.*;
 import com.spring.librarysystem.service.MaterialService;
 import com.spring.librarysystem.service.MemberService;
-import com.spring.librarysystem.validation.Validation;
 import com.spring.librarysystem.validation.ValidationInterceptor;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
@@ -47,7 +46,6 @@ public class Library {
 
     MaterialService materialService = applicationContext.getBean("materialService", MaterialService.class);
     MemberService memberService = applicationContext.getBean("memberService", MemberService.class);
-    //Validation validation = applicationContext.getBean("validation", Validation.class);
 
     public void run(){
         System.out.println("Welcome to the library system..");
@@ -141,20 +139,20 @@ public class Library {
                 System.out.println("Enter magazine title");
                 materialTitle = scanner.nextLine();
                 magazine.setTitle(materialTitle);
-            }while (ValidationInterceptor.getIsNull());
+            }while (ValidationInterceptor.isValid());
 
             do {
                 System.out.println("Enter magazine name");
                 materialName = scanner.nextLine();
                 magazine.setName(materialName);
-            }while (ValidationInterceptor.getIsNull());
+            }while (ValidationInterceptor.isValid());
 
             do {
                 System.out.println("Enter magazine type");
                 materialType = scanner.nextInt();
                 magazine.setMagazineType(materialType);
                 magazine.getMagazineType();
-            }while (ValidationInterceptor.getIsNull());
+            }while (ValidationInterceptor.isValid());
 
     }
 
@@ -166,13 +164,13 @@ public class Library {
             System.out.println("Enter newspaper title");
             materialTitle = scanner.nextLine();
             newspaper.setTitle(materialTitle);
-        }while (ValidationInterceptor.getIsNull());
+        }while (ValidationInterceptor.isValid());
 
         do {
             System.out.println("Enter newspaper name");
             materialName = scanner.nextLine();
             newspaper.setName(materialName);
-        }while (ValidationInterceptor.getIsNull());
+        }while (ValidationInterceptor.isValid());
     }
 
     public void bookDetails(){
@@ -182,27 +180,27 @@ public class Library {
             System.out.println("Enter book title");
             materialTitle = scanner.nextLine();
             book.setTitle(materialTitle);
-        }while (ValidationInterceptor.getIsNull());
+        }while (ValidationInterceptor.isValid());
 
         do {
             System.out.println("Enter book name");
             materialName = scanner.nextLine();
             book.setName(materialName);
-        }while (ValidationInterceptor.getIsNull());
+        }while (ValidationInterceptor.isValid());
 
 
         do {
             System.out.println("Enter book ISBN");
             ISBN = scanner.nextLine();
             book.setISBN(ISBN);
-        }while (ValidationInterceptor.getIsNull());
+        }while (ValidationInterceptor.isValid());
 
         do {
             System.out.println("Enter no of pages");
             noOfPages = scanner.nextInt();
             book.setNoOfPages(noOfPages);
             book.getNoOfPages();
-        }while (ValidationInterceptor.getIsNull());
+        }while (ValidationInterceptor.isValid());
     }
 
     public void viewAllMagazine(){
@@ -257,7 +255,7 @@ public class Library {
                        materialId = scanner.nextInt();
                        magazine.setMeterialId(materialId);
                        magazine.getMeterialId();
-                   }while (ValidationInterceptor.getIsNull());
+                   }while (ValidationInterceptor.isValid());
 
                    materialService.deleteMagazine(magazine);
                    break;
@@ -267,7 +265,7 @@ public class Library {
                        materialId = scanner.nextInt();
                        newspaper.setMeterialId(materialId);
                        newspaper.getMeterialId();
-                   }while (ValidationInterceptor.getIsNull());
+                   }while (ValidationInterceptor.isValid());
 
                    materialService.deleteNewspaper(newspaper);
                    break;
@@ -277,7 +275,7 @@ public class Library {
                        materialId = scanner.nextInt();
                        book.setMeterialId(materialId);
                        book.getMeterialId();
-                   }while (ValidationInterceptor.getIsNull());
+                   }while (ValidationInterceptor.isValid());
                    materialService.deleteBook(book);
                    break;
            }
@@ -304,7 +302,7 @@ public class Library {
                         materialId = scanner.nextInt();
                         magazine.setMeterialId(materialId);
                         magazine.getMeterialId();
-                    }while (ValidationInterceptor.getIsNull());
+                    }while (ValidationInterceptor.isValid());
                     magazineDetails();
                     materialService.updateMagazine(magazine);
                     break;
@@ -315,7 +313,7 @@ public class Library {
                         materialId = scanner.nextInt();
                         newspaper.setMeterialId(materialId);
                         magazine.getMeterialId();
-                    }while (ValidationInterceptor.getIsNull());
+                    }while (ValidationInterceptor.isValid());
 
                     newspaperDetails();
                     materialService.updateNewspaper(newspaper);
@@ -327,7 +325,7 @@ public class Library {
                         materialId = scanner.nextInt();
                         book.setMeterialId(materialId);
                         book.getMeterialId();
-                    }while (ValidationInterceptor.getIsNull());
+                    }while (ValidationInterceptor.isValid());
 
                     bookDetails();
                     materialService.updateBook(book);
@@ -368,13 +366,13 @@ public class Library {
             System.out.println("Enter member name");
             memberName = scanner.nextLine();
             silverMember.setName(memberName);
-        }while (ValidationInterceptor.getIsNull());
+        }while (ValidationInterceptor.isValid());
 
         do {
             System.out.println("Enter member address");
             memberAddress = scanner.nextLine();
             silverMember.setAddress(memberAddress);
-        }while (ValidationInterceptor.getIsNull());
+        }while (ValidationInterceptor.isValid());
     }
 
     public void setGoldMemberDetails(){
@@ -384,25 +382,25 @@ public class Library {
                 System.out.println("Enter member name");
                 memberName = scanner.nextLine();
                 goldMember.setName(memberName);
-            }while (ValidationInterceptor.getIsNull());
+            }while (ValidationInterceptor.isValid());
 
             do {
                 System.out.println("Enter member address");
                 memberAddress = scanner.nextLine();
                 goldMember.setAddress(memberAddress);
-            }while (ValidationInterceptor.getIsNull());
+            }while (ValidationInterceptor.isValid());
 
             do {
                 System.out.println("Enter member credit card no");
                 creditCardNo = scanner.nextLine();
                 goldMember.setCreditCardNo(creditCardNo);
-            }while (ValidationInterceptor.getIsNull());
+            }while (ValidationInterceptor.isValid());
 
             do {
                 System.out.println("Enter member vehicle no");
                 vehicleNo = scanner.nextLine();
                 goldMember.setVehicleNo(vehicleNo);
-            }while (ValidationInterceptor.getIsNull());
+            }while (ValidationInterceptor.isValid());
 
     }
 
@@ -421,7 +419,7 @@ public class Library {
                         memberId = scanner.nextInt();
                         silverMember.setMemberId(memberId);
                         silverMember.getMemberId();
-                    }while (ValidationInterceptor.getIsNull());
+                    }while (ValidationInterceptor.isValid());
                     memberService.deleteSilverMember(silverMember);
                     break;
                 case 2:
@@ -431,7 +429,7 @@ public class Library {
                         memberId = scanner.nextInt();
                         goldMember.setMemberId(memberId);
                         goldMember.getMemberId();
-                    }while (ValidationInterceptor.getIsNull());
+                    }while (ValidationInterceptor.isValid());
                     memberService.deleteGoldMember(goldMember);
                     break;
             }
@@ -455,7 +453,7 @@ public class Library {
                         memberId = scanner.nextInt();
                         silverMember.setMemberId(memberId);
                         silverMember.getMemberId();
-                    }while (ValidationInterceptor.getIsNull());
+                    }while (ValidationInterceptor.isValid());
                     silverMemberDetails();
 
                     memberService.updateSilverMember(silverMember);
@@ -467,7 +465,7 @@ public class Library {
                         memberId = scanner.nextInt();
                         goldMember.setMemberId(memberId);
                         goldMember.getMemberId();
-                    }while (ValidationInterceptor.getIsNull());
+                    }while (ValidationInterceptor.isValid());
                     setGoldMemberDetails();
                     memberService.updateGoldMember(goldMember);
                     break;
@@ -568,14 +566,14 @@ public class Library {
                 book.setMeterialId(materialId);
                 book.getMeterialId();
                 member.setMaterial(book);
-            }while (ValidationInterceptor.getIsNull());
+            }while (ValidationInterceptor.isValid());
 
             do {
                 System.out.println("Enter member id");
                 memberId = scanner.nextInt();
                 member.setMemberId(memberId);
                 member.getMemberId();
-            }while (ValidationInterceptor.getIsNull());
+            }while (ValidationInterceptor.isValid());
             member.setBorrowDate(currentDate);
 
             memberService.insertBorrowBook(member);
@@ -594,7 +592,7 @@ public class Library {
                 memberId = scanner.nextInt();
                 member.setMemberId(memberId);
                 member.getMemberId();
-            }while (ValidationInterceptor.getIsNull());
+            }while (ValidationInterceptor.isValid());
             //memberService.selectBrrowedBook(silverMember);
             for(Book book : memberService.selectBrrowedBook(member)){
                 String displayBook= book.getTitle() + " " + book.getName() + " " + book.getISBN();

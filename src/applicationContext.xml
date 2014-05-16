@@ -84,10 +84,6 @@
         <property name="materialDAO" ref="materialDAO"/>
     </bean>
 
-    <bean name="validation" class="com.spring.librarysystem.validation.Validation">
-
-    </bean>
-
     <bean id="validationInterceptor" class="com.spring.librarysystem.validation.ValidationInterceptor" />
 
     <bean id="MagazineCachedService" class="org.springframework.aop.framework.ProxyFactoryBean">

@@ -5,7 +5,6 @@ import com.spring.librarysystem.repo.DBConnection;
 
 import java.sql.*;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 /**
@@ -16,16 +15,26 @@ public class MemberDAOImpl implements MemberDAO {
 
     private DBConnection connection;
 
+    /**
+     *return mysql connection instance
+     */
     @Override
     public DBConnection getConnection() {
         return connection;
     }
 
+
+    /**
+     *set mysql connection instance
+     */
     @Override
     public void setConnection(DBConnection connection) {
         this.connection = connection;
     }
 
+    /**
+     *insert a silver member to the db
+     */
     @Override
     public void insertSilverMember(SilverMember silverMember) throws SQLException{
         String query = "INSERT INTO member (name, address) VALUES('"
@@ -38,6 +47,9 @@ public class MemberDAOImpl implements MemberDAO {
         conn.close();
     }
 
+    /**
+     *insert a gold member to the db
+     */
     @Override
     public void insertGoldMember(GoldMember goldMember) throws SQLException{
         Connection conn = connection.getConnection();
@@ -61,6 +73,9 @@ public class MemberDAOImpl implements MemberDAO {
         conn.close();
     }
 
+    /**
+     *delete a silver member from db
+     */
     @Override
     public void deleteSilverMember(SilverMember silverMember) throws SQLException{
         String query = "DELETE FROM member WHERE member_id ="
@@ -71,6 +86,9 @@ public class MemberDAOImpl implements MemberDAO {
 
     }
 
+    /**
+     *delete a gold member from db
+     */
     @Override
     public void deleteGoldMember(GoldMember goldMember) throws SQLException{
         Connection conn = connection.getConnection();
@@ -83,11 +101,18 @@ public class MemberDAOImpl implements MemberDAO {
 
     }
 
+
+    /**
+     *find a member from db
+     */
 //    public Member findMember(Member member) throws  SQLException{
 //        Connection conn = connection.getConnection();
 //    }
 
 
+    /**
+     * Update details of the silver member
+     */
     @Override
     public void updateSilverMember(SilverMember silverMember) throws SQLException{
         String query = "UPDATE member SET name = '"
@@ -101,6 +126,9 @@ public class MemberDAOImpl implements MemberDAO {
         conn.close();
     }
 
+    /**
+     *Update details of the gold member
+     */
     @Override
     public void updateGoldMember(GoldMember goldMember) throws SQLException{
 
@@ -126,6 +154,9 @@ public class MemberDAOImpl implements MemberDAO {
         conn.close();
     }
 
+    /**
+     *return all silver member from db
+     */
     @Override
     public List<SilverMember> viewAllSilverMember() throws  SQLException{
         Connection conn = connection.getConnection();
@@ -145,6 +176,9 @@ public class MemberDAOImpl implements MemberDAO {
         return  silverMembers;
     }
 
+    /**
+     *return all borrowed books for a member
+     */
     @Override
     public List<Book> selectBorrwedBookTO(Member member) throws SQLException{
         Connection conn = connection.getConnection();
@@ -164,6 +198,9 @@ public class MemberDAOImpl implements MemberDAO {
         return  brrowedBooks;
     }
 
+    /**
+     *insert a borrow book for a member
+     */
     @Override
     public void insertBorrowdBook(Member member) throws SQLException{
         Connection conn = connection.getConnection();
@@ -176,6 +213,9 @@ public class MemberDAOImpl implements MemberDAO {
         conn.close();
     }
 
+    /**
+     * return all gold member from db
+     */
     @Override
     public List<GoldMember> viewGoldMemeber() throws SQLException{
         Connection conn = connection.getConnection();
